@@ -1,0 +1,791 @@
+<head>
+  <meta charset="utf-8">
+  <title>Kim's Payroll Manager</title>
+  <meta name="author" content="Thomas Kim">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Dependencies -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/animate.css">
+
+</head>
+
+<body>
+  {{> main}}
+</body>
+
+<template name="main">
+  <div id="section1" class="section">
+   <h1 id="logo1"> 
+    <img class="mascot" src="img/bookkeeper.jpg">
+    <a id="homepage">Kim's Payroll Manager</a>
+    <img class="flag" src="img/flag.png">
+   </h1>
+    <h6 id="logo2"> Payroll deductions manager for small business owners [BETA] </h6>
+  </div>
+  {{> Template.dynamic template=page}}
+</template>
+
+<template name="indexPage">
+  {{> navigatebar}}
+  {{> home}}
+  {{> about}}
+  {{> about_img}}
+  {{> login}} 
+  {{> contact_us}}
+  {{> footer}}
+</template>
+
+<template name="personalInfoGUEST">
+  {{> step1_1}}
+  {{> Template.dynamic template=basicInfo data=basicInfoData }}
+  {{> Template.dynamic template=employeeInfo data=employeeInfoData}}
+  {{> footer}}
+</template>
+
+<template name="employeeInfoGUEST">
+  {{> step1_2}}
+  {{> Template.dynamic template=moreEmployeeInfo data=moreEmployeeInfoData}}
+  {{> footer}}
+</template>
+
+<template name="resultGUEST">
+  {{> step3}}
+  {{#each resultData}}
+      {{> Template.dynamic template="payrollStatement" data=this}}
+  {{/each}}
+  <div class="container">
+    <div class="row row1">
+      <input class="button-primary" style="float:right; margin-left: 20px;" type="submit" id="pdf" value="save as pdf">
+      <input class="button" style="float:right; margin-left: 20px;" type="submit" id="prev1" value="previous">
+      <input class="button" style="float:right;" type="submit" id="restart" value="restart">
+    </div>
+  </div>
+ 
+  {{> footer}}
+</template>
+
+<template name="pdfResult">
+  {{#each this}}
+      {{> Template.dynamic template="payrollStatementPDF" data=this}}
+  {{/each}}
+</template>
+
+<template name="navigatebar">
+  <div id="navigation" class="row">
+      <ul class="nav">
+        <li class="navbtn"> 
+          <a href="#section1"> Home </a>
+        </li>
+        <li class="navbtn"> 
+          <a href="#section2"> About </a>
+        </li>
+        <li class="navbtn"> 
+          <a href="#section3"> Login </a>
+        </li>
+        <li class="navbtn"> 
+          <a href="#section4"> Contact Us </a>
+        </li>
+      </ul>
+  </div>
+</template>
+
+<template name="home">
+  <div id="home" class="container container1">
+      <div id="intro" class="row">
+        <div class="six columns">
+          <h4> Avoid hassles calculating  
+             <ul class="texts">
+                <li>Vacation Payment.</li>   
+                <li>Canada Pension Plan Deduction.</li>
+                <li>Income Deduction.</li>
+                <li>Province Tax.</li>
+                <li>Federal Tax.</li>
+                <li>Employment Insurance Deduction.</li>
+                <li>Payment Frequency.</li>
+            </ul>
+          </h4>
+          <h5> Discover employee's payroll in one click. </h5>
+          <a id="tryitnow" class="button button-primary">Try it now</a>
+        </div>
+        <div class="six columns">
+          <img class="preview mac" src="img/macbookpro.jpg">
+          <img class="preview demo" src="/img/preview.gif">
+        </div>
+      </div>
+  </div> 
+</template>
+
+<template name="about">
+  <div id="section2" class="container container2 section">
+    <div id="about" class="row">
+        <div class="one-third column">
+          <h5> <b>Step 1</b>: Type in company information and employee details. </h5>
+        </div>
+        <div class="one-third column">
+          <h5> <b>Step 2</b>: Wait for the manager to process data. <br> (almost instant) </h5>
+        </div>
+        <div class="one-third column">
+          <h5> <b>Step 3</b>: View the payroll statements. </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="one-third column">
+          <img class="step1" src="img/enter.png">
+        </div>
+        <div class="one-third column">
+          <img class="step2 glow" src="img/calculating.png">
+        </div>
+        <div class="one-third column">
+          <img class="step3" src="img/doc.png">
+        </div>
+    </div>
+  </div>      
+</template>
+
+<template name="about_img">
+  <div class="container">
+    
+  </div>
+</template>
+
+<template name="login">
+  <div id="section3" class="container container2 section">
+    <h4> Welcome. Sign in here! </h4>
+    <div class="row">
+      <div class="five columns">
+        <input type="text" placeholder="ID or E-mail" class="u-full-width" id="user_id">
+      </div>
+    </div>
+    <div class="row">
+      <div class="five columns">
+        <input type="password" align="center" placeholder="Password" class="u-full-width" id="user_password">
+      </div>
+    </div>
+    <div class="row">
+      <div class="five columns">
+        <input type="submit" value="Login" class="u-full-width">
+      </div>
+    </div>
+    <div class="row">
+      <div class="five columns">
+         <a class="button button-primary u-full-width" id="tryasguest">Or try it as a guest</a>
+      </div>
+    </div>
+    <h7> Please contact bookkeeper856@gmail.com <br/> to inquire about creating your account.</h7>
+
+  </div>
+</template>
+
+<template name="contact_us">     
+  <div id="section4" class="container container3 section">
+    <form>
+      <div class="row">
+        <div class="five columns">
+          <label for="emailInput">Your email</label>
+          <input class="u-full-width" type="email" placeholder="" id="emailInput">
+        </div>
+        <div class="five columns">
+          <label for="exampleRecipientInput">Reason for contacting</label>
+          <select class="u-full-width" id="recipientInput">
+            <option value="Option 1">Questions</option>
+            <option value="Option 2">Suggestions</option>
+            <option value="Option 3">Others</option>
+          </select>
+        </div>
+      </div>
+      <label for="exampleMessage">Message</label>
+      <textarea class="u-full-width" placeholder="Hi, I would like to ..." id="message"></textarea>
+      <label class="example-send-yourself-copy">
+        <input id="copy" type="checkbox">
+        <span class="label-body">Send a copy to yourself</span>
+        {{> reCAPTCHA}}
+        <input class="button-primary" id="send" style="float:right;" type="submit" value="Submit">
+      </label>
+    </form>
+  </div>
+</template>
+
+<template name="footer">
+  <div id="footer">
+    <div class="container container4">
+      <h6> © Copyright 2017 Kim's Payroll Manager </h6>
+      <h6> All figures based on Payroll Deductions tables from https://www.canada.ca </h6>
+      <a href="https://icons8.com/"> <h6 >Icons copyright to Icons8.com</h6> </a>
+    </div>
+  </div>
+</template>
+
+<template name="registration">
+  <div class="container container1">
+    <h4> Admin Registration </h4>
+    <div class="row">
+        <form>
+          <input type="text" placeholder="ID" id="userId">
+          <input type="text" placeholder="Name" id="userProfile">
+          <input type="email" placeholder="Email" id="userEmail">
+          <input type="password" placeholder="Password" id="userPassword">
+          <input type="submit" value="Register">
+        </form>
+    </div>
+  </div>
+</template>
+
+<template name="step1_1">
+  <div class="container">
+    <div class="row">
+        <h4> Welcome guest!</h4>
+        <h6> Note: For guest, all the information is processed in client-side. We do not store any information. </h6>
+        <h3> 1. Personal Information </h3>
+    </div>
+  </div>
+</template>
+
+<template name="basicInfo">
+  <div class="container container6">
+    <div class="row">
+      <h4 class="logo">
+        Company Information
+        <input type="button" value="edit" style="float:right;" class="button" id="editBasicInfo" />
+      </h4>
+    </div>
+    <div class="row">
+      <div class="six columns">
+        <label for="companyName">Company Name</label>
+        <div class="row row1" id="cName">{{name}}</div>
+        <label for="businessNumber">Business Number</label>
+        <div class="row row1" id="bNumber">{{businessnumber}}</div>
+        <label for="freq">Payment Frequency</label>
+        <div class="row row1" id="pFreq">{{freq}}</div>
+      </div>
+      <div class="six columns">
+          <label for="companyAddress">Company Address</label>
+            <div class="row row1" id="cAddress">{{address}}</div>
+          <div class="row">
+            <div class="one-half column">
+              <label for="province">Province</label>
+              <div class="row row1" id="cProvince">{{province}}</div>
+            </div>
+            <div class="one-half column">
+              <label for="city">City</label>
+                <div class="row row1" id="cCity">{{city}}</div>
+            </div>
+          </div>
+          <label for="postalCode">Postal Code</label>
+          <div class="row row1" id="cPostalcode">{{postalcode}}</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="basicInfoEdit">
+  <div class="container container6">
+    <div class="row">
+      <h4 class="logo">
+        Company Information
+        <input type="button" value="save" style="float:right;" class="button" id="saveBasicInfo" />
+      </h4>
+    </div>
+    <div class="row">
+      <div class="six columns">
+      <label for="companyName">Company Name</label>
+      <input id="companyName" value={{name}} class="u-full-width" placeholder="ABC Company Ltd." type="text">
+      <label for="businessNumber">Business Number</label>
+      <input id="businessNumber" value={{businessnumber}} class="u-full-width" placeholder="123456789" type="text">
+      <label for="freq">Frequency</label>
+      <select class="u-full-width" id="freq">
+        <option value="12" {{monthlySelected}}>Monthly (12 times a year)</option>
+        <option value="26" {{biweeklySelected}}>Biweekly (26 times a year)</option>
+        <option value="24" {{semimonthlySelected}}>Semi-Monthly (24 times a year)</option>
+      </select>
+      </div>
+    <div class="six columns">
+      <label for="payDate">Company Address</label>
+      <input id="address1" value={{address}} class="u-full-width" placeholder="12-345 street NW" type="text">
+      <div class="row">
+        <div class="one-half column">
+          <label for="province">Province</label>
+          <select class="u-full-width" id="provincelist">
+            <option value=""></option>
+            <option value="AB" {{ABSelected}}>AB</option>
+            <option value="BC" {{BCSelected}}>BC</option>
+            <option value="ON" {{ONSelected}}>ON</option>
+            <option value="SK" {{SKSelected}}>SK</option>
+          </select>
+        </div>
+        <div class="one-half column">
+          <label for="city">City</label>
+          <select class="u-full-width" id="citylist">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+      <label for="payDate">Postal Code</label>
+      <input id="postalCode" value={{postalcode}} class="u-full-width" placeholder="A1B C2D" type="text">
+    </div>
+    </div>
+  </div>
+</template>
+
+<template name="employeeInfo">
+  <div class="container container5">
+    <h4 class="logo">Employee Information</h4>
+    {{#each employeeInfoData}}
+      {{> Template.dynamic template=this.template data=this.currentData}}
+    {{/each}}
+    <div class="row">
+      <input type="button" value="delete" style="float:right; margin-left: 20px" class="button" id="delete" />
+      <input type="button" value="add" style="float:right;" class="button" id="add" />
+    </div>
+
+    <div class="row">
+      <input class="button-primary" style="float:right;" type="submit" id="next" value="next">
+    </div>
+  </div>
+</template>
+
+<template name="eachEmployee">
+  <h4 style="font-weight:bold;">Employee {{employeeNumber}}<input type="button" value="edit" style="float:right;" class="button editEmployee" id={{editEmployee}}/>
+  </h4>
+  <div class="row">
+    <div class="six columns">
+      <label for="employeeName">Name</label>
+      <div class="row row1" id={{employeeNameID}}>{{name}}</div>
+      <label for="sinNumber">SIN number</label>
+      <div class="row row1" id={{sinNumberID}}>{{sinnumber}}</div>
+    </div>
+    <div class="six columns">
+      <label for="payDate">Address</label>
+        <div class="row row1" id={{employeeAddressID}}>{{address}}</div>
+      <div class="row">
+        <div class="one-half column">
+          <label for="province">Province</label>
+          <div class="row row1" id={{employeeProvinceID}}>{{province}}</div>
+        </div>
+        <div class="one-half column">
+          <label for="city">City</label>
+            <div class="row row1" id={{employeeCityID}}>{{city}}</div>
+        </div>
+      </div>
+      <label for="payDate">Postal Code</label>
+      <div class="row row1" id={{employeePostalCodeID}}>{{postalcode}}</div>
+    </div>
+  </div>
+</template>
+
+<template name="eachEmployeeEdit">
+  <h4 style="font-weight:bold;">Employee {{employeeNumber}}<input type="button" value="save" style="float:right;" class="button saveEmployee" id={{saveEmployee}}/>
+  </h4>
+  <div class="row">
+      <div class="six columns">
+        <label for="employeeName">Name</label>
+        <input id={{employeeNameID}} value={{name}} class="u-full-width" placeholder="John Kim" type="text">
+        <label for="sinNumber">SIN Number</label>
+        <input id={{sinNumberID}} value={{sinnumber}} class="u-full-width" placeholder="123456789" type="text">
+      </div>
+      <div class="six columns">
+        <label for="employeeAddress">Address</label>
+        <input id={{employeeAddressID}} value={{address}} class="u-full-width" placeholder="12-345 street NW" type="text">
+        <div class="row">
+          <div class="one-half column">
+            <label for="employeeProvince">Province</label>
+            <select class="u-full-width provincelist" id={{employeeProvinceID}}>
+              <option value=""></option>
+              <option value="AB" {{ABSelected}}>AB</option>
+              <option value="BC" {{BCSelected}}>BC</option>
+              <option value="ON" {{ONSelected}}>ON</option>
+              <option value="SK" {{SKSelected}}>SK</option>
+            </select>
+          </div>
+          <div class="one-half column">
+            <label for="employeeCity">City</label>
+            <select class="u-full-width" id={{employeeCityID}}>
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <label for="employeePostalcode">Postal Code</label>
+        <input id={{employeePostalCodeID}} value={{postalcode}} class="u-full-width" placeholder="A1B C2D" type="text">
+      </div>
+  </div>
+</template>
+
+<template name="step1_2">
+  <div class="container">
+    <div class="row" style="margin-bottom: 40px;">
+        <h3> 2. More employee information </h3>
+    </div>
+  </div>
+</template>
+
+<template name="moreEmployeeInfo">
+  <div class="container container5">
+    {{#each moreEmployeeInfoData}}
+      {{> Template.dynamic template=this.template data=this.currentData}}
+    {{/each}}
+
+    <h6> Note: Every value should be in terms of this payment cycle. </h6>
+    <div class="row">
+      <input class="button-primary" style="float:right; margin-left: 20px" type="submit" id="calc" value="process">
+      <input class="button" style="float:right;" type="submit" id="prev" value="previous">
+    </div>
+  </div>
+</template>
+
+<template name="moreEachEmployee">
+  <h4 style="font-weight:bold;">{{name}}<input type="button" value="edit" style="float:right;" class="button editMoreEmployee" id={{editMoreEmployee}}/>
+  </h4>
+  <h5>Employee #{{employeeNumber}}</h5>
+  <div class="row">
+    <div class="six columns">
+      <label for="startDate">Start Date</label>
+      <div class="row row1" id={{employeeStartDateID}}>{{startdate}}</div>
+      <label for="startDate">End Date</label>
+      <div class="row row1" id={{employeeEndDateID}}>{{enddate}}</div>
+       <label for="startDate">Pay Day</label>
+      <div class="row row1" id={{employeePayDayID}}>{{payday}}</div>
+    </div>
+    <div class="six columns">
+      <label for="startDate">Work hours (hr)</label>
+      <div class="row row1" id={{employeeWorkHourID}}>{{workhour}}</div>
+      <label for="startDate">Work rate ($/hr)</label>
+      <div class="row row1" id={{employeeWorkRateID}}>{{workrate}}</div>
+      <label for="sinNumber">EI deduction</label>
+      <div class="row row1" id={{employeeEIID}}>{{eideduction}}</div>
+      <label for="startDate">Vacation pay rate</label>
+      <div class="row row1" id={{employeeVPRID}}>{{vpr}}</div>
+    </div>
+  </div>
+</template>
+
+<template name="moreEachEmployeeEdit">
+  <h4 style="font-weight:bold;">{{name}}<input type="button" value="save" style="float:right;" class="button saveMoreEmployee" id={{saveMoreEmployee}}/>
+  </h4>
+  <h5>Employee #{{employeeNumber}}</h5>
+  <div class="row">
+      <div class="six columns">
+        <label for="startDate">Start Date</label>
+        <input id={{employeeStartDateID}} value={{startdate}} class="u-full-width form-control startdate" type="text">
+        <label for="endDate">End Date</label>
+        <input id={{employeeEndDateID}} value={{enddate}} class="u-full-width form-control enddate" type="text">
+        <label for="payDay">Pay Day</label>
+        <input id={{employeePayDayID}} value={{payday}} class="u-full-width form-control payday" type="text">
+      </div>
+      <div class="six columns">
+        <label for="workHours">Work hours (hr)</label>
+        <input id={{employeeWorkHourID}} value={{workhour}} class="u-full-width" type="text">
+        <label for="workRate">Work rate ($/hr)</label>
+        <input id={{employeeWorkRateID}} value={{workrate}} class="u-full-width" type="text">
+        <label for="employeeEI">EI deduction</label>
+          <select class="u-full-width" id={{employeeEIID}}>
+            <option value="Option 1" {{YesSelected}}>Yes</option>
+            <option value="Option 2" {{NoSelected}}>No</option>
+          </select>
+          <label for="vacationPayRate">Vacation pay rate</label>
+          <select class="u-full-width" id={{employeeVPRID}}>
+            <option value="0" {{Selected0}}>0%</option>
+            <option value="0.04" {{Selected4}}>4%</option>
+            <option value="0.06" {{Selected6}}>6%</option>
+          </select>
+      </div>
+  </div>
+</template>
+
+<template name="step3">
+  <div class="container">
+    <div class="row">
+        <h3 style="margin-bottom: 30px;"> Successfully created payroll statements! </h3>
+    </div>
+  </div>
+</template>
+
+<template name="payrollStatement">
+  <div class="container envelope">
+    <div class="container" style="margin-top: 20px; margin-bottom: 50px;">
+       <div class="ten columns" id="sender">
+        <div class="row">{{companyname}}</div>
+        <div class="row" >{{companyaddress}}</div>
+        <div class="row" >{{companycity}}, {{companyprovince}} {{companypostalcode}}</div>
+      </div>
+      <div class="two columns">
+        <img class="stamp" src="img/stamp.png">
+      </div>
+    </div>
+    <div class="container" style="margin-bottom: 20px;">
+        <div class="four columns">
+        </div>
+        <div class="six columns recipient" >
+          <div class="row">{{employeename}}</div>
+          <div class="row">{{employeeaddress}}</div>
+          <div class="row">{{employeecity}}, {{employeeprovince}} {{employeepostalcode}}</div>
+        </div>
+    </div>
+  </div>
+  <div class="container container7 payrollStmt">
+    <div class="container">
+      <table class="u-full-width">
+        <thead>
+          <tr>
+            <th>Employee</th>
+            <th>Employee No.</th>
+            <th>SIN number</th>
+            <th>Period Start</th>
+            <th>Period End</th>
+            <th>Payday</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{employeename}}</td>
+            <td>{{employeenumber}}</td>
+            <td>{{employeesinnumber}}</td>
+            <td>{{startdate}}</td>
+            <td>{{enddate}}</td>
+            <td>{{payday}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="container">
+
+      <h5>STATEMENT OF EARNINGS</h5>
+      <table class="u-full-width">
+        <thead>
+          <tr> 
+            <th>TYPE</th>
+            <th>HOURS</th>
+            <th>RATE</th>
+            <th style="text-align: right;">CURRENT</th>
+            <th style="text-align: right;">Y.T.D.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SALARY</td>
+            <td>{{workhour}}</td>
+            <td>{{workrate}}</td>
+            <td style="text-align: right;">{{salary}}</td>
+            <td style="text-align: right;">{{salaryytd}}</td>
+          </tr>
+          <tr>
+            <td>VAC.PAY</td>
+            <td></td>
+            <td></td>
+            <td style="text-align: right;">{{vacpay}}</td>
+            <td style="text-align: right;">{{vacpayytd}}</td>
+          </tr>
+          <tr>
+            <td>GROSS WAGE</td>
+            <td></td>
+            <td></td>
+            <td style="text-align: right;">{{grosswage}}</td>
+            <td style="text-align: right;">{{grosswageytd}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="container">
+      <h5>STATEMENT OF DEDUCTIONS AND EMPLOYMENT CONTRIBUTIONS</h5>
+      <table class="u-full-width">
+        <thead>
+          <tr>
+            <th>TYPE</th>
+            <th style="text-align: right;">CURRENT</th>
+            <th style="text-align: right;">Y.T.D.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>C.P.P.</td>
+            <td style="text-align: right;">{{cpp}}</td>
+            <td style="text-align: right;">{{cppytd}}</td>
+          </tr>
+          <tr>
+            <td>E.I.</td>
+            <td style="text-align: right;">{{ei}}</td>
+            <td style="text-align: right;">{{eiytd}}</td>
+          </tr>
+          <tr>
+            <td>FED.TAX</td>
+            <td style="text-align: right;">{{fedtax}}</td>
+            <td style="text-align: right;">{{fedtaxytd}}</td>
+          </tr>
+          <tr>
+            <td>PROV.TAX</td>
+            <td style="text-align: right;">{{provtax}}</td>
+            <td style="text-align: right;">{{provtaxytd}}</td>
+          </tr>
+          <tr>
+            <td>DEDUCTION TOTAL</td>
+            <td style="text-align: right;">{{deductiontotal}}</td>
+            <td style="text-align: right;">{{deductiontotalytd}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="container">
+      <table class="u-full-width">
+        <thead>
+          <tr>
+            <th>SUMMARY</th>
+            <th style="text-align: right;">GROSS PAY</th>
+            <th style="text-align: right;">DEDUCTIONS</th>
+            <th style="text-align: right;">NET PAY</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CURRENT</td>
+            <td style="text-align: right;">{{grosspay}}</td>
+            <td style="text-align: right;">{{deduction}}</td>
+            <td style="text-align: right;">{{netpay}}</td>
+          </tr>
+          <tr>
+            <td>Y.T.D.</td>
+            <td style="text-align: right;">{{grosspayytd}}</td>
+            <td style="text-align: right;">{{deductionytd}}</td>
+            <td style="text-align: right;">{{netpayytd}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
+
+
+<template name="payrollStatementPDF">
+  <!-- Pure PDF: pdf.js is a client-side and only supports html for now -->
+  <!-- A4 = 595 X 842 pixels -->
+
+  <div id="pdfSection1">
+    <div>From: {{companyname}}, {{companyaddress}} {{companycity}}, {{companyprovince}} {{companypostalcode}}</div>
+    <div>To: {{employeename}}, {{employeeaddress}} {{employeecity}}, {{employeeprovince}} {{employeepostalcode}}</div>
+  </div>
+  <div>
+    <div>
+      <br>
+      <br>
+      <div><big><b>EMPLOYEE INFORMATION</b></big></div>
+      <br>
+      <div><b>Name:</b> {{employeename}}</div>
+      <div><b>Employee #</b>{{employeeNumber}}</div>
+      <div><b>SIN:</b> {{employeesinnumber}}</div>
+      <div><b>Period Start:</b> {{startdate}}</div>
+      <div><b>Period End:</b> {{enddate}}</div>
+      <div><b>Payday:</b> {{payday}}</div>
+    </div>
+    <div>
+      <div>
+      <br>
+      <br>
+      <big><b>STATEMENT OF EARNINGS</b></big></div>
+      <table>
+        <thead>
+          <tr> 
+            <th>TYPE</th>
+            <th>HOURS</th>
+            <th>RATE</th>
+            <th>CURRENT</th>
+            <th>Y.T.D.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SALARY</td>
+            <td>{{workhour}}</td>
+            <td>{{workrate}}</td>
+            <td>{{salary}}</td>
+            <td>{{salaryytd}}</td>
+          </tr>
+          <tr>
+            <td>VAC.PAY</td>
+            <td></td>
+            <td></td>
+            <td>{{vacpay}}</td>
+            <td>{{vacpayytd}}</td>
+          </tr>
+          <tr>
+            <td>TOTAL</td>
+            <td></td>
+            <td></td>
+            <td>{{grosswage}}</td>
+            <td>{{grosswageytd}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="container">
+      <div><big><b>STATEMENT OF DEDUCTIONS &amp; EMPLOYMENT CONTRIBUTIONS</b></big></div>
+      <table class="u-full-width">
+        <thead>
+          <tr>
+            <th>TYPE</th>
+            <th>CURRENT</th>
+            <th>Y.T.D.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>C.P.P.</td>
+            <td>{{cpp}}</td>
+            <td>{{cppytd}}</td>
+          </tr>
+          <tr>
+            <td>E.I.</td>
+            <td>{{ei}}</td>
+            <td>{{eiytd}}</td>
+          </tr>
+          <tr>
+            <td>FED.TAX</td>
+            <td>{{fedtax}}</td>
+            <td>{{fedtaxytd}}</td>
+          </tr>
+          <tr>
+            <td>PROV.TAX</td>
+            <td>{{provtax}}</td>
+            <td>{{provtaxytd}}</td>
+          </tr>
+          <tr>
+            <td>DEDUCTION TOTAL</td>
+            <td >{{deductiontotal}}</td>
+            <td>{{deductiontotalytd}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>SUMMARY</th>
+            <th>GROSS PAY</th>
+            <th>DEDUCTIONS</th>
+            <th>NET PAY</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CURRENT</td>
+            <td>{{grosspay}}</td>
+            <td>{{deduction}}</td>
+            <td>{{netpay}}</td>
+          </tr>
+          <tr>
+            <td>Y.T.D.</td>
+            <td>{{grosspayytd}}</td>
+            <td>{{deductionytd}}</td>
+            <td>{{netpayytd}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+    </div>
+  </div>
+</template>

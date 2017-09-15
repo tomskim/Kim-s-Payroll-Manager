@@ -1,0 +1,216 @@
+
+.container1 {
+	padding-top: 100px;
+	padding-bottom: 100px;
+}
+
+.container2 {
+	padding-top: 100px;
+	padding-bottom: 100px;
+}
+
+.container3 {
+	padding-top: 100px;
+	padding-bottom: 130px;
+}
+
+.container4{
+	padding-top: 100px;
+	padding-bottom: 30px;
+}
+
+.container5{
+	padding-bottom: 100px;
+}
+
+.container6{
+	padding-top: 40px;
+	padding-bottom:20px;
+}
+
+.container7{
+	padding-top: 30px;
+	padding-bottom: 30px;
+	margin-bottom: 80px;
+}
+
+.row1 {
+	padding-bottom: 20px;
+}
+
+
+/* Navigation bar */
+
+#logo1 {
+	text-align: center;
+	margin-top: 10px;
+	padding-left: 30px;
+}
+
+#logo2 {
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 40px;
+	padding-left: 40px;
+}
+
+#homepage:hover {
+	cursor: pointer;
+}
+
+.nav {
+	width: 100%;
+	list-style: none;
+	overflow: hidden;
+	font-size: 20px;
+	padding-top: 10px;
+	background-color: white;
+	border-top: 2px solid #ededed;
+	border-bottom: 2px solid #ededed;
+	z-index: 2;
+}
+
+.navbtn {
+	margin-left: 15.5%;
+	float: left;
+}
+
+.active {
+	color: #000066;
+	font-weight: bold;
+	font-size: 22px;
+}
+
+a {
+	text-decoration: none !important;
+}
+
+a:hover {
+	color: #000066;
+	font-weight: bold;
+}
+
+/* Image property */
+.mascot {
+	width: 70px;
+	height: 70px;
+	position: relative;
+}
+
+.flag {
+	width: 30px;
+	height: 25px;
+	position: relative;
+}
+
+.preview {
+	position: absolute;
+}
+
+.mac {
+  	max-width: 55%;
+}
+
+.demo {
+	margin-left: 8%;
+	margin-top: 4%;
+	max-width: 40%;
+}
+
+.stamp {
+	position: absolute;
+  	margin: -1rem auto -12rem;
+  	width: 100px;
+	height: 80px;
+}
+
+#payrollStmt{
+	display: block;
+	overflow: hidden;
+}
+
+.step1 {
+	margin-left: calc(50% - 70px);
+}
+
+.step2 {
+	margin-left: calc(50% - 50px);
+	margin-top: 10px;
+}
+
+.step3 {
+	margin-left: calc(50% - 80px);
+}
+
+.glow {
+	animation:pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from { box-shadow:0px 0px 10px 3px #0066cc; }
+  to { box-shadow:0px 0px 20px 5px #0066cc; }
+}
+
+#section3 {
+	margin-left: calc(50% - 200px);
+	width: 100%;
+}
+
+
+#footer {
+	background-color: #3f3f3f;
+	color: #d3d3d3;
+}
+
+/* datepicker */
+
+.ui-datepicker {
+  width: auto;
+  height: auto;
+  padding: 20px;
+  font: 12pt Arial, sans-serif;
+  background-color: white;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+}
+
+.ui-datepicker .ui-icon {
+	cursor:pointer;
+	margin-right: 10px;
+}
+
+/* envelope */
+
+.envelope {
+	width: 100% auto;
+  	height: 100% auto;
+	border: 2px solid #939393;
+}
+
+.envelope:hover {
+	border: 2px solid black;
+}
+
+/* payroll statement */
+.payrollStmt {
+	width: 100% auto;
+  	height: 100% auto;
+  	margin-top: 5px;
+	border: 2px solid #939393;
+}
+
+.payrollStmt:hover {
+	border: 2px solid black;
+}
+
+#sender {
+	font: 15pt Arial, sans-serif;
+}
+
+.recipient{
+	font: 20pt Arial, sans-serif;
+	float: right;
+}
+
+
