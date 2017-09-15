@@ -8,4 +8,4 @@ This is a payroll deductions manager for small business owners, allowing them to
 
 - Currently supports a guest access.
 
-- Account functionality in progress.
+- Userbase functionality in progress.
